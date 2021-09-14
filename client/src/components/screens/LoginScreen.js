@@ -1,5 +1,5 @@
 import './LoginScreen.css'
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
@@ -7,8 +7,13 @@ const LoginScreen = ({history}) => {
 
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
-
   const [error,setError]=useState('')
+
+  useEffect(()=>{
+    if(localStorage.getItem("authToken")){
+      history.push("/")
+    }
+  },[history])
 
 
   const loginHandler= async (e)=>{
@@ -37,7 +42,7 @@ const LoginScreen = ({history}) => {
     <form onSubmit={loginHandler} className="login-screen_form">
       <h3 className="login-screen_title">Login</h3>
       {error && <span className="error-message">{error}</span>}
-      
+
 
       <div className="form-group">
         <label htmlFor="email">Email:</label>
@@ -52,7 +57,7 @@ const LoginScreen = ({history}) => {
 
       <button type="submit" className="btn btn-primary">Login</button>
 
-      <span className="login-screen_subtext">Already have an account? <Link to="/login">Login</Link></span>
+      <span className="login-screen_subtext">Don't have an account? <Link to="/register">Register</Link></span>
     </form>
 
 
