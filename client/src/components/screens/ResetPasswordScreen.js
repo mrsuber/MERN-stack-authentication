@@ -27,8 +27,8 @@ const ResetPasswordScreen = ({match}) => {
     return setError("Passwords don't match")
   }
   try{
-    const {data} = await axios.put(`/api/auth/passwordreset/${match.params.resetToken}`,{password,},config)
-  
+    const {data} = await axios.put(`/api/auth/resetpassword/${match.params.resetToken}`,{password,},config)
+
     setSuccess(data.data)
   }catch(error){
     setError(error.response.data.error)
