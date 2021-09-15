@@ -1,5 +1,5 @@
 import './RegisterScreen.css'
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
@@ -10,6 +10,11 @@ const RegisterScreen = ({history}) => {
   const [confirmpassword,setConfirmpassword]=useState('')
   const [error,setError]=useState('')
 
+  useEffect(()=>{
+    if(localStorage.getItem("authToken")){
+      history.push("/")
+    }
+  },[history])
 
   const registerHandler= async (e)=>{
     e.preventDefault()
