@@ -2,6 +2,7 @@ require('dotenv').config({path:"./config.env"})
 const express = require('express')
 const connectDB = require('./config/db')
 const errorHandler = require('./middleware/error')
+const path = require('path')
 
 
 //connectDB
@@ -16,6 +17,18 @@ app.use('/api/private',require('./routes/private'))
 
 //Error unhandler(should be last piece of middleware)
 app.use(errorHandler)
+
+if(process.env.NODE_ENV==="production"){
+  app.use(express.static(path.join(__dirname,'/client/build')))
+  app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'client','build','index.html'))
+
+  })
+}else{
+  app.get('/', (req,res)=>{
+    res.send('Api running');
+  })
+}
 
 
 const PORT = process.env.PORT || 5000;
