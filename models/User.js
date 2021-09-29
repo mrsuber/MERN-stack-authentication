@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
     select:false,
   },
   profilePic:{type:String,default:""},
-  isAdmin:{type:Boolean,default:true},
+  isAdmin:{type:Boolean,default:false},
   resetPasswordToken: String,
   resetPasswordExpire:Date
 },
