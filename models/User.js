@@ -24,9 +24,12 @@ const UserSchema = new mongoose.Schema({
     minlength:6,
     select:false,
   },
+  profilePic:{type:String,default:""},
+  isAdmin:{type:Boolean,default:true},
   resetPasswordToken: String,
   resetPasswordExpire:Date
-})
+},
+{timestamps:true})
 
 //midile ware to hash the password
 UserSchema.pre("save", async function(next){
